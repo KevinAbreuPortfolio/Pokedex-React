@@ -1,6 +1,10 @@
 import React,{useState} from 'react'
 import {useParams} from 'react-router-dom'
 import Axios from 'axios'
+import {Box,Bar} from '../home/homeElements'
+import {Accordian} from '../../components/Accordian/accordian'
+
+
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -37,17 +41,46 @@ export const Test = () => {
     // console.log("test");
   })()
   return (
-    <div>
-      <h3>ID: {id}</h3>
-      <h1>{species}</h1>
-      <h1>{hp}</h1>
-      <h1>{atk}</h1>
-      <h1>{def}</h1>
-      <h1>{spatk}</h1>
-      <h1>{spdef}</h1>
-      <h1>{speed}</h1>
+    <>
+      {/* <div> 
+        <div>Poke Pic</div>
+        <div>Type 1</div>
+        <div>Type 2</div>
+      </div>
+      <Box>
+        <Bar stat={hp}/>
+        <Bar stat={atk}/>
+        <Bar stat={def}/>
+        <Bar stat={spatk}/>
+        <Bar stat={spdef}/>
+        <Bar stat={speed}/>
+      </Box>
+      <div>
+        <div>Ability 1</div>
+        <div>Ability 2</div>
+      </div>
+      <div>
+        <div>Dex No</div>
+        <div>Height</div>
+        <div>Weight</div>
+        <div>Description</div>
+      </div> */}
+      <Accordian name="Test">
+        Dolor eu culpa ea laboris. Excepteur sunt et eu ipsum officia labore sit quis nisi. 
+        Anim nisi eiusmod duis laboris pariatur pariatur. Sunt sunt nulla esse ullamco eu non
+        esse dolor aliquip nostrud ullamco. Reprehenderit velit enim id dolor. Laborum proident 
+        velit excepteur dolore aute id non id et anim eiusmod est in excepteur. Est consequat irure 
+        anim quis officia sunt tempor eiusmod fugiat duis enim nostrud.
+      </Accordian>
+      <Accordian name="Test2">
+        Dolor eu culpa ea laboris. Excepteur sunt et eu ipsum officia labore sit quis nisi. 
+        Anim nisi eiusmod duis laboris pariatur pariatur. Sunt sunt nulla esse ullamco eu non
+        esse dolor aliquip nostrud ullamco. Reprehenderit velit enim id dolor. Laborum proident 
+        velit excepteur dolore aute id non id et anim eiusmod est in excepteur. Est consequat irure 
+        anim quis officia sunt tempor eiusmod fugiat duis enim nostrud.
+      </Accordian>
 
-    </div>
+    </>
   );
 }
 
