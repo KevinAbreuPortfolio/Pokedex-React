@@ -1,8 +1,9 @@
 import React,{useState} from 'react'
 import {useParams} from 'react-router-dom'
 import Axios from 'axios'
-import {Box,Bar} from '../home/homeElements'
+import {Box,Bar} from '../../components/StatTable/statBarElements'
 import {Accordian} from '../../components/Accordian/accordian'
+import StatTable from '../../components/StatTable/statTable'
 
 
 
@@ -73,12 +74,9 @@ export const Test = () => {
         anim quis officia sunt tempor eiusmod fugiat duis enim nostrud.
       </Accordian>
       <Accordian name="Test2">
-        Dolor eu culpa ea laboris. Excepteur sunt et eu ipsum officia labore sit quis nisi. 
-        Anim nisi eiusmod duis laboris pariatur pariatur. Sunt sunt nulla esse ullamco eu non
-        esse dolor aliquip nostrud ullamco. Reprehenderit velit enim id dolor. Laborum proident 
-        velit excepteur dolore aute id non id et anim eiusmod est in excepteur. Est consequat irure 
-        anim quis officia sunt tempor eiusmod fugiat duis enim nostrud.
+        <StatTable hp={hp} atk={atk} def={def} spatk={spatk} spdef={spdef} speed={speed}/>
       </Accordian>
+      
 
     </>
   );

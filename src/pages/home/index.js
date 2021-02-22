@@ -54,12 +54,12 @@ function Home() {
       <button onClick={()=>getPokemon(value)}>Search</button>
       <PokeCard image={image}>
         <Box>
-          <Bar stat={hp}/>
+          {/* <Bar stat={hp}/>
           <Bar stat={atk}/>
           <Bar stat={def}/>
           <Bar stat={spatk}/>
           <Bar stat={spdef}/>
-          <Bar stat={speed}/>
+          <Bar stat={speed}/> */}
         </Box>
       </PokeCard>
       <Link to={`/${num}`}>More Details!</Link>
