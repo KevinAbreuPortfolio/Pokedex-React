@@ -39,28 +39,26 @@ function Home() {
       setSpeed(response.data.stats[5]["base_stat"]);
       setImage(response.data.sprites.other["official-artwork"]["front_default"]);
       // setImage(`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${zeroPad(dexNum,3)}.png`)
-    })
+    }).catch(err => console.log(err));
     // console.log(species);
   }
+
   
   const [value,setValue] = useState();
+  const handleKeyPress = (event) => {
+  if(event.key === 'Enter'){
+    getPokemon(value)
+  }
+}
   
   return (
     <>
       <GlobalStyle />
       <h1>Testing</h1> 
-      <input type="text" onChange={e => setValue(e.target.value)}></input>
+      <input type="text" onKeyPress={handleKeyPress} onChange={e => setValue(e.target.value) }></input>
       <button onClick={()=>getPokemon(randNum)}>Im feeling lucky</button>
       <button onClick={()=>getPokemon(value)}>Search</button>
       <PokeCard image={image}>
-        <Box>
-          {/* <Bar stat={hp}/>
-          <Bar stat={atk}/>
-          <Bar stat={def}/>
-          <Bar stat={spatk}/>
-          <Bar stat={spdef}/>
-          <Bar stat={speed}/> */}
-        </Box>
       </PokeCard>
       <Link to={`/${num}`}>More Details!</Link>
     </>

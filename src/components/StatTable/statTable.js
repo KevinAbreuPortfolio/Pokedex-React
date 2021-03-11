@@ -1,10 +1,10 @@
 import React from 'react'
 import { Bar } from './statBarElements'
+import {Stats} from './statTableElements'
 
 const StatTable = (props) => {
     return (
-        <>     
-          <table>
+        <Stats>     
               <tbody>
                 <tr>
                   <td>HP</td>
@@ -22,12 +22,12 @@ const StatTable = (props) => {
                   <td><Bar stat={props.def}/></td>
                 </tr>
                 <tr>
-                  <td>Sp.Attack</td>
+                  <td>Sp.Atk</td>
                   <td>{props.spatk}</td>
                   <td><Bar stat={props.spatk}/></td>
                 </tr>
                 <tr>
-                  <td>Sp.Defense</td>
+                  <td>Sp.Def</td>
                   <td>{props.spdef}</td>
                   <td><Bar stat={props.spdef}/></td>
                 </tr>
@@ -37,8 +37,7 @@ const StatTable = (props) => {
                   <td><Bar stat={props.speed}/></td>
                 </tr>
               </tbody>
-          </table>
-        </>
+        </Stats>
     )
 }
 

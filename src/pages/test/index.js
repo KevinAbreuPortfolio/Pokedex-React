@@ -13,6 +13,7 @@ function capitalizeFirstLetter(string) {
 
 export const Test = () => {
   let { id } = useParams();
+  //info1
   const [species,setSpecies] = useState();
   const [num,setNum] = useState();
   const [hp,setHp] = useState();
@@ -22,25 +23,62 @@ export const Test = () => {
   const [spdef,setSpdef] = useState();
   const [speed,setSpeed] = useState();
   const [image,setImage] = useState();
+  const [type1,setType1] = useState();
+  const [type2,setType2] = useState();
+  const [ability,setAbility] = useState();
 
-  (() =>{
-    // let dexNum = Math.floor(Math.random() * 899);
-    const zeroPad = (num, places) => String(num).padStart(places, '0')
-    Axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then((response)=>{
-      // console.log(response);
-      // setSpecies(response.data.name);
-      setSpecies(capitalizeFirstLetter(response.data.name));
-      setNum(response.data.id);
-      setHp(response.data.stats[0]["base_stat"]);
-      setAtk(response.data.stats[1]["base_stat"]);
-      setDef(response.data.stats[2]["base_stat"]);
-      setSpatk(response.data.stats[3]["base_stat"]);
-      setSpdef(response.data.stats[4]["base_stat"]);
-      setSpeed(response.data.stats[5]["base_stat"]);
-      setImage(`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${zeroPad(id,3)}.png`)
+  
+  //info2
+  const [flavText,setFlavText] = useState();
+
+
+    const data1 = fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    const data2 = fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+
+    Promise.all([data1,data2]).then(values=> {
+      return Promise.all(values.map(r=>r.json()))
+    }).then(([info1,info2])=>{
+      //info1
+      setSpecies(capitalizeFirstLetter(info1.name));
+      setNum(info1.id);
+      setHp(info1.stats[0]["base_stat"]);
+      setAtk(info1.stats[1]["base_stat"]);
+      setDef(info1.stats[2]["base_stat"]);
+      setSpatk(info1.stats[3]["base_stat"]);
+      setSpdef(info1.stats[4]["base_stat"]);
+      setSpeed(info1.stats[5]["base_stat"]);
+      setImage(info1.sprites.other["official-artwork"]["front_default"]);
+      setType1(info1.types[0].type.name);
+      try{
+        setType2(info1.types[1].type.name);
+      }
+      catch(err){
+        console.log(err);
+      }
+      //info2
+      setFlavText(info2.flavor_text_entries[0].flavor_text)
+      
+
     })
-    // console.log("test");
-  })()
+      // .catch(err => console.log(err));
+  // (() =>{
+  //   // let dexNum = Math.floor(Math.random() * 899);
+  //   const zeroPad = (num, places) => String(num).padStart(places, '0')
+  //   Axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then((response)=>{
+  //     // console.log(response);
+  //     // setSpecies(response.data.name);
+  //     setSpecies(capitalizeFirstLetter(response.data.name));
+  //     setNum(response.data.id);
+  //     setHp(response.data.stats[0]["base_stat"]);
+  //     setAtk(response.data.stats[1]["base_stat"]);
+  //     setDef(response.data.stats[2]["base_stat"]);
+  //     setSpatk(response.data.stats[3]["base_stat"]);
+  //     setSpdef(response.data.stats[4]["base_stat"]);
+  //     setSpeed(response.data.stats[5]["base_stat"]);
+  //     setImage(`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${zeroPad(id,3)}.png`)
+  //   })
+  //   // console.log("test");
+  // })()
   return (
     <>
       {/* <div> 
@@ -66,20 +104,23 @@ export const Test = () => {
         <div>Weight</div>
         <div>Description</div>
       </div> */}
-      <Accordian name="Test">
-        Dolor eu culpa ea laboris. Excepteur sunt et eu ipsum officia labore sit quis nisi. 
-        Anim nisi eiusmod duis laboris pariatur pariatur. Sunt sunt nulla esse ullamco eu non
-        esse dolor aliquip nostrud ullamco. Reprehenderit velit enim id dolor. Laborum proident 
-        velit excepteur dolore aute id non id et anim eiusmod est in excepteur. Est consequat irure 
-        anim quis officia sunt tempor eiusmod fugiat duis enim nostrud.
+      <Accordian name="Description">
+        <p>{flavText}</p>
       </Accordian>
-      <Accordian name="Test2">
+      <Accordian name="Base Stats">
         <StatTable hp={hp} atk={atk} def={def} spatk={spatk} spdef={spdef} speed={speed}/>
       </Accordian>
+      <h1>{type1}</h1>
+      <h1>{type2}</h1>
+      <h1>{ability}</h1>
+
+      
+        
       
 
     </>
   );
+  
 }
 
 export default Test;
